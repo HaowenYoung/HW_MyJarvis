@@ -2,6 +2,8 @@
 
 # MyJarvis — A Personal Agent System
 
+> **This is the privacy-scrubbed framework template.** The author's personalized instance — with real `raw/` logs, compiled `wiki/`, and active projects — lives in a separate private repo. What you see here is the empty skeleton: clone it, feed it your own data, and it becomes *your* agent.
+
 > Generic LLMs give everyone the same answer. MyJarvis gives *you* **your** answer — grounded in your own rules, traits, values, reading notes, project context, and historical decisions.
 
 Before generating any output, the agent asks itself:
@@ -152,19 +154,22 @@ There is intentionally no `package.json` or `requirements.txt`. Each script docu
 # 1. clone
 git clone <this-repo> myjarvis && cd myjarvis
 
-# 2. populate secrets (NEVER commit these)
+# 2. pull the wiki-compiler submodule
+git submodule update --init --recursive
+
+# 3. populate secrets (NEVER commit these — already in .gitignore)
 cp tools/llm-config.env.example      tools/llm-config.env
 cp tools/notify-config.env.example   tools/notify-config.env
 cp tools/notion-ids.env.example      tools/notion-ids.env
 # fill in API keys, Notion page IDs, 飞书 webhook, etc.
 
-# 3. open the repo in Claude Code
+# 4. open the repo in Claude Code
 claude .
 
-# 4. in the Claude Code session, bootstrap
-# > read CLAUDE.md and setup_guide.md, then initialize raw/ and wiki/ skeleton
+# 5. in the Claude Code session, bootstrap
+# > read CLAUDE.md and setup_guide.md, create your first raw/daily/ entry
 
-# 5. first real operation once you have a few days of raw/ data:
+# 6. first real operation once you have a few days of raw/ data:
 # > compile
 ```
 
@@ -172,32 +177,40 @@ A full guided walkthrough (Notion database schemas, 飞书 bot service file, cro
 
 ---
 
-## Privacy & going public
+## Privacy model
 
-**This repository currently contains personal data** — daily logs, life events, psychological traits, private project pointers. It is intended to stay **private** until scrubbed. In particular:
+**This repo starts empty and safe to clone.** `raw/`, `wiki/`, and `projects/` are scrubbed skeletons — only structural directories, `.gitkeep` markers, and two generic framework docs (`wiki/meta/governance.md`, `wiki/meta/rule-lifecycle.md`) are tracked.
 
-- `raw/daily/`, `raw/events/`, `raw/feedback/` — personal logs and corrections
-- `wiki/traits/`, `wiki/values/` — personal psychological profile
-- `raw/papers/`, `raw/ideas/` — unpublished research directions
-- `projects/*/source_path.txt` — paths to private repos
-- `tools/*-config.env` — API keys (these are already in `.gitignore`)
+But **the moment you start using it, your fork becomes personal**. Within days you'll have daily logs, life events, decision feedback, project notes, and — after distillation — a wiki that describes your psychology. Plan for that:
 
-### If you want to reuse MyJarvis as a template
+- Treat your fork as **private by default**. Do not push it to a public remote without a fresh scrub.
+- Sensitive surfaces to watch once you start using MyJarvis:
+  - `raw/daily/`, `raw/events/`, `raw/feedback/` — personal logs
+  - `wiki/traits/`, `wiki/values/` — psychological profile
+  - `raw/papers/`, `raw/ideas/` — unpublished research
+  - `projects/*/source_path.txt` — paths to private repos
+  - `tools/*-config.env` — API keys (already `.gitignore`d, but check after first run)
 
-1. Empty every subdirectory of `raw/` (keep the folder structure, delete contents).
-2. Delete `wiki/traits/` and `wiki/values/` entirely.
-3. Replace all `tools/*-config.env` with `*.env.example` files containing placeholder keys only.
-4. Remove `projects/*/source_path.txt` entries.
-5. Review `raw/claude-sessions/` and `raw/scratch/` for personal context before publishing.
-6. Re-read `.gitignore` and confirm no secret slipped in.
+### If you later want to publish your personalized fork
 
-A helper script to automate step 1–4 is on the roadmap but not yet written.
+Same checklist this template was built with:
+
+1. Empty every subdirectory of `raw/` (keep structure + `.gitkeep`, delete contents).
+2. Delete `wiki/{memory,rules,policies,traits,values,context,knowledge,plans,reviews,topics}/` contents.
+3. Reset `wiki/INDEX.md` to a blank template; delete `wiki/meta/{changelog,discoveries-inbox,distill-log,wrapup-log,search-index}`.
+4. Replace concrete `projects/<name>/` with `projects/_template/` again.
+5. Revert `tools/*-config.env` to `.env.example` files with placeholder keys.
+6. Strip hardcoded paths from `tools/auto-wrapup.sh`, `tools/explore-repo.sh`, `tools/myjarvis-feishu.service`.
+7. Clear `.claude/settings.local.json` permission cache.
+8. Re-read `.gitignore`, `grep` for your username / home path / real API keys, commit.
+
+A helper script to automate this scrub is on the roadmap but not yet written.
 
 ---
 
 ## Status
 
-Single-maintainer personal project. APIs, schemas, and directory conventions may change without notice. Issues are welcome, especially about architectural ideas; pull requests are considered case-by-case.
+This repository is a **framework skeleton**, not a live product. There is no upstream merging community PRs — the author maintains their personalized fork privately. You are expected to clone, own, and diverge: make it yours. Issues discussing architecture are welcome; design debates are the point.
 
 ## License
 
