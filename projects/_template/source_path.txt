@@ -1,0 +1,6 @@
+# Replace this file's contents with the absolute path to your project's code repository.
+# Example:
+#   /home/alice/Projects/my-research-project
+#
+# The wrap-up / compile / repo-exploration workflows read this file to locate
+# the real repo without copying it into MyJarvis.

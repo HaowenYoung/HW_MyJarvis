@@ -1,0 +1,32 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Node (for wiki-compiler hook)
+node_modules/
+
+# Secrets
+.env
+tools/notify-config.env
+tools/llm-config.env
+tools/notion-ids.env
+tools/secrets/*
+!tools/secrets/.gitkeep
+
+# Compiled state (regenerable)
+wiki/.compile-state.json
+
+# External clones (not part of this repo)
+gh_repos/
+archive/
+
+# Temporary
+*.tmp
+*.bak

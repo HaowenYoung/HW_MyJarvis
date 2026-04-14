@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "name": "Personal Agent System",
+  "sources": [
+    { "path": "raw/", "exclude": [] }
+  ],
+  "output": "wiki/",
+  "mode": "recommended",
+  "topic_hints": [
+    "time-patterns",
+    "energy-patterns",
+    "scheduling",
+    "estimation",
+    "priorities",
+    "workflow"
+  ],
+  "link_style": "markdown"
+}

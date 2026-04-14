@@ -1,0 +1,17 @@
+[Unit]
+Description=MyJarvis Feishu Bot
+After=network.target ollama.service
+
+[Service]
+Type=simple
+# Edit the three paths below before `systemctl enable` on your own machine.
+User=YOUR_USER
+WorkingDirectory=/path/to/MyJarvis
+ExecStart=/path/to/python3 tools/feishu-bot.py
+Restart=always
+RestartSec=10
+TimeoutStopSec=10
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
